@@ -1,4 +1,4 @@
-SRCS=		main.c read_file.c GNL_get_next_line/get_next_line.c GNL_get_next_line/get_next_line_utils.c minilibx_macos/libmlx.a libft/libft.a draw.c 
+SRCS=		main.c read_file.c GNL_get_next_line/get_next_line.c GNL_get_next_line/get_next_line_utils.c minilibx_macos/libmlx.a libft/libft.a draw.c  printf/printf.a
 
 CC=		gcc 
 

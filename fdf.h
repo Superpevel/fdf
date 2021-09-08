@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "GNL_get_next_line/get_next_line.h"
+#include "printf/ft_printf.h"
 typedef struct 
 {
     int width;

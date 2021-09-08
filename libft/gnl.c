@@ -27,18 +27,3 @@ int get_next_line(int fd, char **line)
     }
     return(0);
 }
-
-int main()
-{
-    char *line;
-    int fd;
-
-    fd = open("text.txt",O_RDONLY);
-    get_next_line(fd,&line);
-    printf("%s\n",line);
-    get_next_line(fd,&line);
-    printf("%s\n",line);
-    get_next_line(fd,&line);
-    printf("%s\n",line);
-
-}

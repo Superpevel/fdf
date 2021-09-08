@@ -24,16 +24,41 @@ int main(int argc,char **argv)
     fdf *data;
     data = (fdf*)malloc(sizeof(fdf));
     int fd;
-    read_file(data,argv[1]);
-    int i;
-    int j;
-    data->move_x = 150;
-    data->move_y = 150;
-    data->agle =0.8;
-    data->mlx_ptr = mlx_init();
-    data->win_ptr = mlx_new_window(data->mlx_ptr,1000,1000,"FDF");
-    data->zoom = 20;
-    draw_map(data);
-    mlx_key_hook(data->win_ptr,deal_key,data);
-    mlx_loop(data->mlx_ptr);
+    char *check;
+    
+    if(ft_strnstr(argv[1],".fdf",ft_strlen(argv[1])) && ft_strlen(argv[1]) > 4)
+    {
+    check = ft_substr(argv[1],ft_strlen(argv[1]) - 4,4);
+    if (ft_strnstr(check,".fdf",4))
+    {
+        free(check);     
+        fd = open(argv[1],O_RDONLY);
+        if(fd==-1)
+        {
+            ft_printf("cant open file");
+            return(0);
+        }
+        read_file(data,argv[1]);
+        int i;
+        int j;
+        data->move_x = 150;
+        data->move_y = 150;
+        data->agle =0.8;
+        data->mlx_ptr = mlx_init();
+        data->win_ptr = mlx_new_window(data->mlx_ptr,1000,1000,"FDF");
+        data->zoom = 20;
+        draw_map(data);
+        mlx_key_hook(data->win_ptr,deal_key,data);
+        mlx_loop(data->mlx_ptr);
+    }
+    else
+    {
+        ft_printf("Not valid file");
+    }
+    }
+    else
+    {
+        ft_printf("Not valid file");
+        return(0);
+    }
 }
