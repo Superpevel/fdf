@@ -14,9 +14,8 @@ int max(int a,int b)
 
 void isometric(float *x,float *y,int z,fdf *data)
 {
-    *x = (*x-*y) * cos(data->agle);
-    *y = (*x+*y) * sin(data->agle) - z;
-
+	*x = (*x - *y) * cos(data->agle);
+	*y = (*x + *y) * sin(data->agle) - z;
 }
 
 void draw(float x,float y,float x1,float y1,fdf *data)
@@ -29,7 +28,8 @@ void draw(float x,float y,float x1,float y1,fdf *data)
 
     z = data->z_matrix[(int)y][(int)x];
     z1 = data->z_matrix[(int)y1][(int)x1];
-    
+    isometric(&x,&y,z,data);
+    isometric(&x1,&y1,z1,data);   
     if(z || z1)
     {
         data->color = 0xe80c0c;
@@ -40,9 +40,7 @@ void draw(float x,float y,float x1,float y1,fdf *data)
     x1*=data->zoom;
     y*=data->zoom;
     y1*=data->zoom;
-    isometric(&x,&y,z,data);
-    isometric(&x1,&y1,z1,data);
-    
+
     x+=data->move_x;
     y+=data->move_y;
     y1+=data->move_y;
