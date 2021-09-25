@@ -19,8 +19,17 @@ typedef struct
     int move_y;
     float agle;
 } fdf;
+
+typedef struct
+{
+    float x;
+    float y;
+    float x1;
+    float y1;
+} cord;
+
 void read_file(fdf *data,char *filename);
-void draw(float x,float y,float x1,float y1,fdf *data);
+// void draw(float x,float y,float x1,float y1,fdf *data);
 void draw_map(fdf *data);
 
 #endif

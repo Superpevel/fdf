@@ -1,5 +1,6 @@
-SRCS=		main.c read_file.c minilibx_macos/libmlx.a libft/libft.a draw.c  printf/printf.a gnl/get_next_line.c gnl/get_next_line_utils.c
+SRCS=		main.c read_file.c draw.c gnl/get_next_line.c gnl/get_next_line_utils.c
 
+LIBS = minilibx_macos/libmlx.a printf/printf.a libft/libft.a
 CC=		gcc
 
 NAME=		fdf
@@ -12,11 +13,11 @@ OBJS=		$(SRCS:.c=.o)
 
 all:	$(NAME)
 
-$(NAME):
+$(NAME): $(OBJS)
 	$(MAKE) -C ./minilibx_macos
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./printf
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -g -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBS) -g -framework OpenGL -framework AppKit
 
 clean:
 	cd printf && $(MAKE) clean
