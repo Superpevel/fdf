@@ -1,12 +1,12 @@
 #ifndef FDF_H
 # define FDF_H
-#include "libft/libft.h"
-#include "minilibx_macos/mlx.h"
+#include "./libft/libft.h"
+#include "./minilibx_macos/mlx.h"
 #include <stdio.h>
 #include <fcntl.h>
-#include "GNL_get_next_line/get_next_line.h"
-#include "printf/ft_printf.h"
-typedef struct 
+#include "./gnl/get_next_line.h"
+#include "./printf/ft_printf.h"
+typedef struct
 {
     int width;
     int height;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 13:27:30 by selbert           #+#    #+#             */
+/*   Updated: 2021/09/25 13:27:31 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	max_len(char const *s, unsigned int start)
@@ -38,10 +50,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		sub = malloc(sizeof(char) * (len + 1));
 		if (!(sub))
 			return (NULL);
+		return (ft_sub_fill(s, start, len, sub));
 	}
 	else
+	{
 		sub = malloc(sizeof(char) * (j + 1));
-	if (!(sub))
-		return (NULL);
-	return (ft_sub_fill(s, start, len, sub));
+		if (!(sub))
+			return (NULL);
+		return (ft_sub_fill(s, start, j, sub));
+	}
 }

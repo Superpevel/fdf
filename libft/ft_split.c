@@ -1,79 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 13:26:34 by selbert           #+#    #+#             */
+/*   Updated: 2021/09/25 13:26:35 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t	ft_count_words(char const *s, char c)
+int	ft_count_word(const char *s, char c)
 {
-	size_t	words;
+	size_t	i;
 
-	words = 0;
+	i = 0;
 	while (*s)
 	{
 		while (*s == c)
 			s++;
 		if (*s)
 		{
+			i++;
 			while (*s && *s != c)
 				s++;
-			words++;
 		}
 	}
-	return (words);
+	return (i);
 }
 
-static char	*ft_get_word(char *word, char c)
+void	*ft_next_word(char const **s, char c)
 {
-	char	*start;
+	char	*str;
+	size_t	i;
 
-	start = word;
-	while (*word && *word != c)
-		word++;
-	*word = '\0';
-	return (ft_strdup(start));
+	i = 0;
+	while ((*s)[i] && (*s)[i] != c)
+		i++;
+	str = ft_substr(*s, 0, i);
+	if (!str)
+		return (NULL);
+	*s = *s + i;
+	return (str);
 }
 
-char	**ft_get_words(char *s, char c, size_t words_count, size_t i)
+void	*ft_free_str(char **new, size_t i)
 {
-	char	**words;
-	char	*word;
+	while (i--)
+		free(new[i]);
+	free(new);
+	return (NULL);
+}
 
-	words = (char **)ft_memloc_bonus(sizeof(char *) * (words_count + 1));
-	if (words)
+char	**ft_fill_split(const char *s, char c, char **new)
+{
+	size_t	i;
+
+	i = 0;
+	while (*s)
 	{
-		while (i < words_count)
+		while (*s == c)
+			s++;
+		if (*s)
 		{
-			while (*s == c)
-				s++;
-			if (*s)
-			{
-				word = ft_get_word(s, c);
-				if (!(word))
-				{
-					ft_free_words_bonus(words, i);
-					return (NULL);
-				}
-				words[i++] = word;
-				s += (ft_strlen(word) + 1);
-			}
+			new[i] = ft_next_word(&s, c);
+			if (new[i] == NULL)
+				return (ft_free_str(new, i));
+			i++;
 		}
-		words[i] = NULL;
 	}
-	return (words);
+	new[i] = NULL;
+	return (new);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**words;
-	char	*line;
-	size_t	i;
+	char	**new;
+	int		words;
 
-	i =0;
 	if (!s)
 		return (NULL);
-	line = ft_strdup((char *)s);
-	if (!line)
+	words = ft_count_word(s, c);
+	new = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!new)
 		return (NULL);
-	if (!c)
-		return (NULL);
-	words = ft_get_words(line, c, ft_count_words(line, c), i);
-	free(line);
-	return (words);
+	return (ft_fill_split(s, c, new));
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 13:27:27 by selbert           #+#    #+#             */
+/*   Updated: 2021/09/25 13:29:52 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_is_char(char c, char *set)
@@ -15,7 +27,7 @@ size_t	ft_after(char *s, char *set)
 {
 	size_t	j;
 
-	s =s + ft_strlen(s) - 1;
+	s = s + ft_strlen(s) - 1;
 	j = 0;
 	while (ft_is_char(*s, set))
 	{

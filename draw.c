@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 14:19:25 by selbert           #+#    #+#             */
+/*   Updated: 2021/09/25 14:20:01 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <math.h>
-int max(int a,int b)
+
+int max(int a, int b)
 {
     if(b>a){
         if(b<0)
@@ -12,13 +25,13 @@ int max(int a,int b)
     return(-a);
 }
 
-void isometric(float *x,float *y,int z,fdf *data)
+void isometric(float *x, float *y, int z, fdf *data)
 {
 	*x = (*x - *y) * cos(data->agle);
 	*y = (*x + *y) * sin(data->agle) - z;
 }
 
-void draw(float x,float y,float x1,float y1,fdf *data)
+void draw(float x, float y, float x1, float y1, fdf *data)
 {
     float x_step;
     float y_step;
@@ -29,7 +42,7 @@ void draw(float x,float y,float x1,float y1,fdf *data)
     z = data->z_matrix[(int)y][(int)x];
     z1 = data->z_matrix[(int)y1][(int)x1];
     isometric(&x,&y,z,data);
-    isometric(&x1,&y1,z1,data);   
+    isometric(&x1,&y1,z1,data);
     if(z || z1)
     {
         data->color = 0xe80c0c;
@@ -58,9 +71,9 @@ void draw(float x,float y,float x1,float y1,fdf *data)
         mlx_pixel_put(data->mlx_ptr,data->win_ptr,x,y,data->color);
         x += x_step;
         y += y_step;
-    
+
     }
-    
+
 }
 
 void draw_map(fdf *data)
@@ -81,7 +94,5 @@ void draw_map(fdf *data)
             x++;
         }
         y++;
-    }
-    
-
+}
 }

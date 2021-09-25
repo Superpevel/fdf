@@ -1,68 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 13:25:03 by selbert           #+#    #+#             */
+/*   Updated: 2021/09/25 13:36:46 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-static int	ft_pow(int a, int b)
-{
-	int temp;
 
-	temp = a;
-	while (b > 1)
-	{
-		a *= temp;
-		b--;
-	}
-	if (b == 0)
-		return (1);
-	return (a);
-}
-
-static char	*ft_itoa2(int i, long int n, int neg)
+size_t	ft_j(int i)
 {
-	char	*dest;
-	int		j;
+	size_t	j;
 
 	j = 0;
-	if (!(dest = malloc((i + 1) * sizeof(char))))
-		return (0);
-	if (neg == -1)
-	{
-		dest[0] = '-';
-		n *= neg;
+	if (i == 0)
+		return (1);
+	if (i < 0)
 		j++;
-		i--;
-	}
-	dest[i] = 0;
-	i--;
-	while (i >= 0)
+	while (i != 0)
 	{
-		dest[j] = ((n / ft_pow(10, i)) % 10) + '0';
+		i = i / 10;
 		j++;
-		i--;
 	}
-	dest[j] = 0;
-	return (&dest[0]);
+	return (j);
 }
 
-char		*ft_itoa(int n)
+char	*ft_fill2(char *str, size_t i, size_t j, int n)
 {
-	int			i;
-	long int	temp;
-	int			neg;
-	long int	numb;
+	while (i < j--)
+	{
+		str[j] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (str);
+}
 
-	temp = n;
+char	*ft_itoa(int n)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
 	i = 0;
-	neg = 1;
-	numb = n;
-	if (temp < 0)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	j = ft_j(n);
+	str = (char *)malloc(sizeof(char) * (j + 1));
+	if (!str)
+		return (NULL);
+	str[j] = '\0';
+	if (n < 0)
 	{
+		str[0] = '-';
+		n = n * -1;
 		i++;
-		temp *= -1;
-		neg = -1;
 	}
-	while (temp >= 10)
-	{
-		i++;
-		temp /= 10;
-	}
-	i++;
-	return (ft_itoa2(i, numb, neg));
+	return (ft_fill2(str, i, j, n));
 }
