@@ -6,7 +6,7 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:22:58 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/26 13:15:01 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 14:26:36 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_height(char *filename)
 	return (height);
 }
 
-fdf	*fill1_matrix(fdf *data, char *line, int j, int i)
+t_fdf	*fill1_matrix(t_fdf *data, char *line, int j, int i)
 {
 	char	**s;
 
@@ -52,7 +52,7 @@ fdf	*fill1_matrix(fdf *data, char *line, int j, int i)
 	return (data);
 }
 
-void	fill_matrix(fdf *data, char *filename)
+void	fill_matrix(t_fdf *data, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -96,7 +96,7 @@ int	get_width(char *filename)
 	return (j);
 }
 
-void	read_file(fdf *data, char *filename)
+void	read_file(t_fdf *data, char *filename)
 {
 	int		i;
 

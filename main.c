@@ -6,13 +6,13 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:23:37 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/26 13:22:56 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 14:30:46 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	deal_key(int key, fdf *data)
+int	deal_key(int key, t_fdf *data)
 {
 	if (key == 126)
 		data->move_y -= 10;
@@ -36,7 +36,7 @@ int	deal_key(int key, fdf *data)
 	return (0);
 }
 
-void	start_program(fdf *data, char **argv)
+void	start_program(t_fdf *data, char **argv)
 {
 	int	fd;
 
@@ -52,7 +52,7 @@ void	start_program(fdf *data, char **argv)
 		data->move_y = 150;
 		data->agle = 0.8;
 		data->mlx_ptr = mlx_init();
-		data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
+		data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "fdf");
 		data->zoom = 20;
 		draw_map(data);
 		mlx_key_hook(data->win_ptr, deal_key, data);
@@ -62,7 +62,7 @@ void	start_program(fdf *data, char **argv)
 
 int	main(int argc, char **argv)
 {
-	fdf		*data;
+	t_fdf	*data;
 	char	*check;
 
 	if (argc > 2 || argc < 2)
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 		ft_printf("Invalid arguments");
 		return (0);
 	}
-	data = (fdf *)malloc(sizeof(fdf));
+	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (ft_strnstr(argv[1], ".fdf",
 			ft_strlen(argv[1])) && ft_strlen(argv[1]) > 4)
 	{

@@ -6,7 +6,7 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:19:25 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/25 17:43:26 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 14:26:27 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	max(int a, int b)
 	return (-a);
 }
 
-cord	isometric(cord dta, int z, int z1, fdf *data)
+t_cord	isometric(t_cord dta, int z, int z1, t_fdf *data)
 {
 	dta.x = (dta.x - dta.y) * cos(data->agle);
 	dta.y = (dta.x + dta.y) * sin(data->agle) - z;
@@ -35,7 +35,7 @@ cord	isometric(cord dta, int z, int z1, fdf *data)
 	return (dta);
 }
 
-void	draw1(cord dta, fdf *data)
+void	draw1(t_cord dta, t_fdf *data)
 {
 	int		max1;
 	float	x_step;
@@ -62,7 +62,7 @@ void	draw1(cord dta, fdf *data)
 	}
 }
 
-void	draw(cord dta, fdf *data)
+void	draw(t_cord dta, t_fdf *data)
 {
 	int		z;
 	int		z1;
@@ -79,9 +79,9 @@ void	draw(cord dta, fdf *data)
 	draw1(dta, data);
 }
 
-void	draw_map(fdf *data)
+void	draw_map(t_fdf *data)
 {
-	cord	dta;
+	t_cord	dta;
 
 	dta.y = 0;
 	while (dta.y < data->height)
