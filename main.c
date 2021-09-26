@@ -6,7 +6,7 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:23:37 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/26 13:14:19 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 13:22:56 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	deal_key(int key, fdf *data)
 
 void	start_program(fdf *data, char **argv)
 {
-	int fd;
+	int	fd;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -47,16 +47,16 @@ void	start_program(fdf *data, char **argv)
 	}
 	else
 	{
-	read_file(data, argv[1]);
-	data->move_x = 150;
-	data->move_y = 150;
-	data->agle = 0.8;
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
-	data->zoom = 20;
-	draw_map(data);
-	mlx_key_hook(data->win_ptr, deal_key, data);
-	mlx_loop(data->mlx_ptr);
+		read_file(data, argv[1]);
+		data->move_x = 150;
+		data->move_y = 150;
+		data->agle = 0.8;
+		data->mlx_ptr = mlx_init();
+		data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
+		data->zoom = 20;
+		draw_map(data);
+		mlx_key_hook(data->win_ptr, deal_key, data);
+		mlx_loop(data->mlx_ptr);
 	}
 }
 
@@ -65,10 +65,10 @@ int	main(int argc, char **argv)
 	fdf		*data;
 	char	*check;
 
-	if (argc>2 || argc < 2)
+	if (argc > 2 || argc < 2)
 	{
 		ft_printf("Invalid arguments");
-		return(0);
+		return (0);
 	}
 	data = (fdf *)malloc(sizeof(fdf));
 	if (ft_strnstr(argv[1], ".fdf",
@@ -79,15 +79,11 @@ int	main(int argc, char **argv)
 		{
 			free(check);
 			start_program(data, argv);
-			return(0);
 		}
 		else
-		{
 			ft_printf("Not valid file");
-			return (0);
-		}
 	}
 	else
 		ft_printf("Not valid file");
-	return(0);
+	return (0);
 }
