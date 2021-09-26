@@ -6,7 +6,7 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:22:58 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/25 14:53:53 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 13:15:01 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	fill_matrix(fdf *data, char *filename)
 {
 	int		fd;
 	char	*line;
-	char	**s;
 	int		i;
 	int		j;
 
@@ -71,7 +70,6 @@ void	fill_matrix(fdf *data, char *filename)
 	}
 	free(line);
 	close(fd);
-	data->z_matrix[i] = NULL;
 }
 
 int	get_width(char *filename)
@@ -100,7 +98,6 @@ int	get_width(char *filename)
 
 void	read_file(fdf *data, char *filename)
 {
-	char	*line;
 	int		i;
 
 	data->height = get_height(filename);

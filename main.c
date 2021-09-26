@@ -6,7 +6,7 @@
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:23:37 by selbert           #+#    #+#             */
-/*   Updated: 2021/09/25 16:06:15 by selbert          ###   ########.fr       */
+/*   Updated: 2021/09/26 13:14:19 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	deal_key(int key, fdf *data)
 {
-	printf("%d key check\n", key);
 	if (key == 126)
 		data->move_y -= 10;
 	if (key == 125)
@@ -37,14 +36,17 @@ int	deal_key(int key, fdf *data)
 	return (0);
 }
 
-int	start_program(int fd, fdf *data, char **argv)
+void	start_program(fdf *data, char **argv)
 {
+	int fd;
+
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
 		ft_printf("cant open file");
-		return (0);
 	}
+	else
+	{
 	read_file(data, argv[1]);
 	data->move_x = 150;
 	data->move_y = 150;
@@ -55,14 +57,19 @@ int	start_program(int fd, fdf *data, char **argv)
 	draw_map(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	fdf		*data;
-	int		fd;
 	char	*check;
 
+	if (argc>2 || argc < 2)
+	{
+		ft_printf("Invalid arguments");
+		return(0);
+	}
 	data = (fdf *)malloc(sizeof(fdf));
 	if (ft_strnstr(argv[1], ".fdf",
 			ft_strlen(argv[1])) && ft_strlen(argv[1]) > 4)
@@ -71,7 +78,8 @@ int	main(int argc, char **argv)
 		if (ft_strnstr(check, ".fdf", 4))
 		{
 			free(check);
-			start_program(fd, data, argv);
+			start_program(data, argv);
+			return(0);
 		}
 		else
 		{
@@ -80,8 +88,6 @@ int	main(int argc, char **argv)
 		}
 	}
 	else
-	{
 		ft_printf("Not valid file");
-		return (0);
-	}
+	return(0);
 }

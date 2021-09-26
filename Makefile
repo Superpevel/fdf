@@ -6,7 +6,7 @@ CC=		gcc
 NAME=		fdf
 
 CFLAGS +=
-CFLAGS +=	-ansi -pedantic
+CFLAGS +=	-Wall -Wextra -Werror
 CFLAGS +=	-I.
 
 OBJS=		$(SRCS:.c=.o)
